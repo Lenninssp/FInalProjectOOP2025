@@ -1,24 +1,35 @@
-import java.sql.Connection;
-import java.sql.SQLException;
-
-import static java.lang.System.out;
 
 public class User {
-    public static void main(String[] args) {
-        try (Connection conn = DataBaseConnector.connect()){
-            String sql = """
-                    CREATE TABLE USERS (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    usename VARCHAR(50) NOT NULL,
-                    email VARCHAR(100),
-                    password VARCHAR(100)
-                    );
-                    """;
-            assert conn != null;
-            conn.createStatement().execute(sql);
-            out.println("Table users created successfully");
-        } catch( SQLException e) {
-            out.println("Error createing table " + e.getMessage());
-        }
+    private int id;
+    private String username;
+    private String email;
+    private String password;
+
+    public User(int id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String username, String email, String password) {
+        this(0, username, email, password);
+    }
+
+    public int getId() { return id;};
+    public void setId(int id) {this.id = id;};
+
+    public String getUsername() {return this.username;};
+    public void setUsername(String username){this.username = username;};
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+
+    @Override
+    public String toString() {
+        return "User{id=" + id + ", username='" + username + "', email='" + email + "'}";
     }
 }
