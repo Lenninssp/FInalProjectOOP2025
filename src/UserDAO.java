@@ -6,7 +6,7 @@ public class UserDAO {
     public static void createTable () {
         try (Connection conn = DataBaseConnector.connect()) {
             String sql = """
-                    CREATE TABLE users (
+                    CREATE TABLE IF NOT EXISTS users (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     username VARCHAR(50) NOT NULL,
                     email VARCHAR(100),
@@ -19,8 +19,13 @@ public class UserDAO {
         } catch (SQLException e) {
             out.println("Error creating table " + e.getMessage());
         }
-    } //todo: create security check to see if table is already created
+    }
     public static void createUser(User user) {
+        User existing = getUserByUsername(user.getUsername());
+        if(existing != null){
+            out.println("El usuario ya existe");
+            return;
+        }
         String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
         try (Connection conn = DataBaseConnector.connect()
         ) {
@@ -68,4 +73,29 @@ public class UserDAO {
         }
         return null;
     }
+
+    public static User getUserByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE username = ?";
+
+        try (Connection conn = DataBaseConnector.connect()) {
+            assert conn != null;
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, username);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String foundUsername = rs.getString("username");
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    return new User(id, foundUsername, email, password);
+                }
+            }
+        } catch (SQLException e) {
+            out.println("Error reading user: " + e.getMessage());
+        }
+
+        return null;
+    }
+
 }

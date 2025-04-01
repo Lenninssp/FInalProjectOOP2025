@@ -14,5 +14,12 @@ public class Main {
         UserDAO.createUser(newUser);
         User fetchedUser = UserDAO.getUserById(newUser.getId());
         out.println("Usuario leido desde DB: " + fetchedUser);
+
+        TaskDAO.createTaskTable();
+
+        Task newTask = new Task("Finish project", "I gotta finish the oop project", false, 1);
+        TaskDAO.createTask(newTask);
+        Task fetchedTask = TaskDAO.getTaskById(newTask.getId());
+        out.println("Task retreived: " + fetchedTask);
     }
 }
