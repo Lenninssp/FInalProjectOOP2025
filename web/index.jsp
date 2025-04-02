@@ -8,9 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>Just a quick hi</title>
   </head>
   <body>
-  $END$
+    <h1>Lennin Steven Sabogal Prieto</h1>
+  <form action="hello" method="post">
+    <input type="text" name="username" placeholder="Lennin Steven">
+    <button type="submit">Submit</button>
+  </form>
   </body>
 </html>
