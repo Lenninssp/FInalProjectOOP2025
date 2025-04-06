@@ -13,6 +13,8 @@
     <input type="text" name="title" required><br>
     <label>Description:</label>
     <input type="text" name="description"><br>
+    <label>Due date:</label>
+    <input type="date" name="dueDate"><br>
     <button type="submit">Create Task</button>
 </form>
 <form action="task-list" method="get">

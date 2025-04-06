@@ -28,6 +28,9 @@
   <label>Completed:</label>
   <input type="checkbox" name="completed" <%= task.isCompleted() ? "checked" : "" %>><br>
 
+  <label>Due date:</label>
+  <input type="date" name="dueDate" value="<%= task.getDueDate() != null ? task.getDueDate() : ""%>"><br>
+
   <button type="submit">💾 Update Task</button>
 </form>
 <%@include file="common/footer.jsp"%>

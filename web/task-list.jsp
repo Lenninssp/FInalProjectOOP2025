@@ -14,6 +14,7 @@
     <th>Title</th>
     <th>Description</th>
     <th>Completed</th>
+    <th>Due date</th>
     <th>User ID</th>
   </tr>
   <%
@@ -24,6 +25,7 @@
     <td><%= task.getTitle() %></td>
     <td><%= task.getDescription() %></td>
     <td><%= task.isCompleted() %></td>
+    <td><%= task.getDueDate()%></td>
     <td><%= task.getUserId() %></td>
     <td>
       <form action="toggle-task" method="post" style="display:inline;">

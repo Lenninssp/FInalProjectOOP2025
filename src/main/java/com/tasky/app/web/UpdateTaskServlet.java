@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 @WebServlet("/update-task")
 public class UpdateTaskServlet extends HttpServlet {
@@ -23,8 +24,11 @@ public class UpdateTaskServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         boolean completed = request.getParameter("completed") != null;
-
-        Task updatedTask = new Task(taskId, title, description, completed, userId);
+        String dueDateStr = request.getParameter("dueDate");
+        LocalDate dueDate = dueDateStr != null && !dueDateStr.isEmpty()
+                ? LocalDate.parse(dueDateStr)
+                : null;
+        Task updatedTask = new Task(taskId, title, description, completed, userId, dueDate);
         TaskDAO.updateTask(updatedTask);
 
         request.getSession().setAttribute("flash", "✅ Task updated!");
