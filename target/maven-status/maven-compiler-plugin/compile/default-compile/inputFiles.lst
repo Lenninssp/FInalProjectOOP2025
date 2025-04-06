@@ -1,0 +1,8 @@
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/Main.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/dao/TaskDAO.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/dao/UserDAO.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/model/Task.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/model/User.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/util/DataBaseConnector.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/HelloServlet.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/RegisterServlet.java
