@@ -8,7 +8,7 @@
   List<Task> tasks = (List<Task>) request.getAttribute("tasks");
   if (tasks != null && !tasks.isEmpty()) {
 %>
-<table border="1">
+<table class="table table-bordered table-striped">
   <tr>
     <th>ID</th>
     <th>Title</th>
