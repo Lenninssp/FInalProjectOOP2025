@@ -2,6 +2,7 @@ package com.tasky.app.web;
 
 import com.tasky.app.dao.TaskDAO;
 import com.tasky.app.model.Task;
+import com.tasky.app.util.Session;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,8 +24,8 @@ public class TaskServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-        // Temporary user ID (we can use session later)
-        int userId = 1;
+        Integer userId = Session.getLoggedUserId(request, response);
+        if(userId == null) return;
 
         Task task = new Task(title, description, false, userId);
         TaskDAO.createTaskTable(); // make sure the table exists

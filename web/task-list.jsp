@@ -6,10 +6,8 @@
   <title>Task List</title>
 </head>
 <body>
-<form action="task.jsp" method="get">
-  <button type="submit">Create task</button>
-</form>
-<h2>My Tasks</h2>
+<%@include file="navbar.jsp"%>
+<h2>My Tasks</h2>…
 <%
   List<Task> tasks = (List<Task>) request.getAttribute("tasks");
   if (tasks != null && !tasks.isEmpty()) {

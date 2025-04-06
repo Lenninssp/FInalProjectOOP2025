@@ -12,6 +12,7 @@
     <title>Create Task</title>
 </head>
 <body>
+<%@include file="navbar.jsp"%>
 <h2>Create a new task</h2>
 <form action="create-task" method="post">
     <label>Title:</label>

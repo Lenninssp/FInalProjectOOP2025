@@ -3,6 +3,7 @@ package com.tasky.app.dao;
 import com.tasky.app.util.DataBaseConnector;
 import com.tasky.app.model.User;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 
 import static java.lang.System.out;
@@ -100,6 +101,27 @@ public class UserDAO {
             out.println("Error reading user: " + e.getMessage());
         }
 
+        return null;
+    }
+
+    public static User getUserByUsernameAndPassword(String username, String password) {
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+        try (Connection conn = DataBaseConnector.connect();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String email = rs.getString("email");
+                return new User(id, username, email, password);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Error during login: " + e.getMessage());
+        }
         return null;
     }
 

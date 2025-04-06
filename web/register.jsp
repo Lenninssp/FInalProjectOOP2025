@@ -11,8 +11,9 @@
     <title>Register</title>
 </head>
 <body>
-  <h2>Register user</h2>
-  <form action="register" method="post">
+<%@include file="navbar.jsp" %>
+<h2>Register user</h2>
+<form action="register" method="post">
     <label>Username:</label>
     <input type="text" name="username"><br>
     <label>Email:</label>
@@ -20,7 +21,7 @@
     <label>Password:</label>
     <input type="password" name="password">
     <button type="submit">Submit</button>
-  </form>
+</form>
 
 </body>
 </html>
