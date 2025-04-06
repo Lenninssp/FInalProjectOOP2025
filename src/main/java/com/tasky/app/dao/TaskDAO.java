@@ -103,4 +103,29 @@ public class TaskDAO {
         }
         return tasks;
     }
+
+
+    public static void toggleTaskCompletion(int taskId, boolean currentState) {
+        String sql = "UPDATE tasks SET completed = ? WHERE id = ?";
+        try (Connection conn = DataBaseConnector.connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setBoolean(1, !currentState);
+            stmt.setInt(2, taskId);
+            stmt.executeUpdate();
+            System.out.println("Task marked as completed");
+        }
+        catch(SQLException e) {
+            System.out.println("❌ Error marking task as completed: " + e);
+        }
+    }
+
+    public static void deleteTask(int taskId) {
+        String sql = "DELETE FROM tasks WHERE id = ?" ;
+        try (Connection conn = DataBaseConnector.connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, taskId);
+            stmt.executeUpdate();
+            System.out.println("Task deleted: " + taskId);
+        } catch(SQLException e) {
+            System.out.println("❌ Error deleting task: " + e);
+        }
+    }
 }
