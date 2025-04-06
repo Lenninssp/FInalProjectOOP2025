@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="true" %>
 <div style="background-color: #f0f0f0; padding: 10px;">
-  <a href="index.jsp">🏠 Home</a> |
+  <a href="dashboard.jsp">🏠 Home</a> |
   <a href="task.jsp">📝 New Task</a> |
   <a href="task-list">📋 My Tasks</a> |
   <a href="register.jsp">👤 Register</a> |

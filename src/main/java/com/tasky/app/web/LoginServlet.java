@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("userId", user.getId());
-            response.sendRedirect("task-list");
+            response.sendRedirect("dashboard.jsp");
         } else {
             response.getWriter().println("<h2>❌ Invalid credentials</h2>");
         }
