@@ -1,0 +1,39 @@
+package com.tasky.app.web;
+
+import com.tasky.app.dao.TaskDAO;
+import com.tasky.app.model.Task;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Logger;
+
+@WebServlet("/create-task")
+public class TaskServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(TaskServlet.class.getName());
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+
+        // Temporary user ID (we can use session later)
+        int userId = 1;
+
+        Task task = new Task(title, description, false, userId);
+        TaskDAO.createTaskTable(); // make sure the table exists
+        TaskDAO.createTask(task);
+
+        logger.info("New task created: " + task);
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<h2>Task '" + title + "' created successfully!</h2>");
+    }
+}

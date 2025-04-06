@@ -1,5 +1,14 @@
 package com.tasky.app.model;
 
+import com.tasky.app.util.DataBaseConnector;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Task {
     private int id;
     private String title;

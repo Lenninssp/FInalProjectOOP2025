@@ -19,5 +19,8 @@
     <form action="register.jsp" method="get">
       <button type="submit">Go to register</button>
     </form>
+    <form action="task.jsp" method="get">
+      <button type="submit">Go to Task</button>
+    </form>
   </body>
 </html>

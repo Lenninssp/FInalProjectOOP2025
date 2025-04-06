@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.tasky.app.model.Task" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: lenninsabogal
   Date: 6/04/25
@@ -8,9 +9,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Create Task</title>
 </head>
 <body>
-
+<h2>Create a new task</h2>
+<form action="create-task" method="post">
+    <label>Title:</label>
+    <input type="text" name="title" required><br>
+    <label>Description:</label>
+    <input type="text" name="description"><br>
+    <button type="submit">Create Task</button>
+</form>
+<form action="task-list" method="get">
+    <button type="submit">Task List</button>
+</form>
 </body>
 </html>

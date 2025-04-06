@@ -4,6 +4,8 @@ import com.tasky.app.util.DataBaseConnector;
 import com.tasky.app.model.Task;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.System.out;
 
@@ -76,5 +78,29 @@ public class TaskDAO {
             out.println("Error reading task: " + e.getMessage());
         }
         return null;
+    }
+
+    public static List<Task> getTasksByUserId(int userId) {
+        List<Task> tasks = new ArrayList<>();
+        String sql = "SELECT * FROM tasks WHERE user_id = ?";
+        try (Connection conn = DataBaseConnector.connect();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                boolean completed = rs.getBoolean("completed");
+
+                Task task = new Task(id, title, description, completed, userId);
+                tasks.add(task);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error reading tasks: " + e.getMessage());
+        }
+        return tasks;
     }
 }
