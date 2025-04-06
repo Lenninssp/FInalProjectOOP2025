@@ -11,6 +11,7 @@
     <title>Login</title>
 </head>
 <body>
+<%@ include file="flash.jsp" %>
 <%@include file="navbar.jsp"%>
 <h2>Login</h2>
 <form action="login" method="post">

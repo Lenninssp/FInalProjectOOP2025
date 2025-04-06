@@ -30,8 +30,7 @@ public class RegisterServlet extends HttpServlet {
         User fetchedUser = UserDAO.getUserById(user.getId());
         logger.info("Fetched user: " + fetchedUser);
 
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<h2>!User " + username + " registered with success</h2>");
+        request.getSession().setAttribute("flash", "✅ Registration successful");
+        response.sendRedirect("register.jsp");
     }
 }

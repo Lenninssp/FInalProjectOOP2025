@@ -11,6 +11,7 @@
     <title>Register</title>
 </head>
 <body>
+<%@ include file="flash.jsp" %>
 <%@include file="navbar.jsp" %>
 <h2>Register user</h2>
 <form action="register" method="post">
