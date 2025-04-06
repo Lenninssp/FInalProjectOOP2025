@@ -7,14 +7,7 @@
   Time: 1:50 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
-<%@ include file="flash.jsp" %>
-<%@include file="navbar.jsp"%>
+<%@include file="common/header.jsp"%>
 <%
     Integer userId = (Integer) session.getAttribute("userId");
     String username = (String) session.getAttribute("username");
@@ -37,5 +30,4 @@
 </strong> completed ✔️, <%= total - completed%> pending ⏱️</p>
 <a href="task.jsp">Create a new task</a>
 <a href="task-list">View all tasks</a>
-</body>
-</html>
+<%@include file="common/footer.jsp"%>

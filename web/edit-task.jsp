@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="com.tasky.app.model.Task" %>
-<%@ include file="navbar.jsp" %>
-<%@ include file="flash.jsp" %>
+<%@include file="common/header.jsp"%>
+
 <%
   Task task = (Task) request.getAttribute("task");
   if (task == null) {
@@ -30,3 +30,4 @@
 
   <button type="submit">💾 Update Task</button>
 </form>
+<%@include file="common/footer.jsp"%>

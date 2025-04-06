@@ -6,14 +6,7 @@
   Time: 10:34 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Create Task</title>
-</head>
-<body>
-<%@ include file="flash.jsp" %>
-<%@include file="navbar.jsp"%>
+<%@include file="common/header.jsp"%>
 <h2>Create a new task</h2>
 <form action="create-task" method="post">
     <label>Title:</label>
@@ -25,5 +18,4 @@
 <form action="task-list" method="get">
     <button type="submit">Task List</button>
 </form>
-</body>
-</html>
+<%@include file="common/footer.jsp"%>

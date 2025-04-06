@@ -5,14 +5,7 @@
   Time: 9:10 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-<%@ include file="flash.jsp" %>
-<%@include file="navbar.jsp" %>
+<%@include file="common/header.jsp"%>
 <h2>Register user</h2>
 <form action="register" method="post">
     <label>Username:</label>
@@ -23,6 +16,5 @@
     <input type="password" name="password">
     <button type="submit">Submit</button>
 </form>
+<%@include file="common/footer.jsp"%>
 
-</body>
-</html>

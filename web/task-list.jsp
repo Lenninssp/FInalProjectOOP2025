@@ -1,13 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.tasky.app.model.Task" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-  <title>Task List</title>
-</head>
-<body>
-<%@ include file="flash.jsp" %>
-<%@include file="navbar.jsp"%>
+<%@include file="common/header.jsp"%>
+
 <h2>My Tasks</h2>…
 <%
   List<Task> tasks = (List<Task>) request.getAttribute("tasks");
@@ -59,5 +54,4 @@
 <%
   }
 %>
-</body>
-</html>
+<%@include file="common/footer.jsp"%>
