@@ -1,5 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.tasky.app.model.Task" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.temporal.ChronoUnit" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="common/header.jsp"%>
 
@@ -36,12 +38,41 @@
   <%
     for (Task task : tasks) {
   %>
-  <tr>
+  <tr class="<%=
+  task.getDueDate() == null ? "" :
+  task.getDueDate().isBefore(LocalDate.now()) ? "table-danger" :
+  task.getDueDate().isEqual(LocalDate.now()) ? "table-warning" :
+  ""
+  %>">
     <td><%= task.getId() %></td>
     <td><%= task.getTitle() %></td>
     <td><%= task.getDescription() %></td>
     <td><%= task.isCompleted() %></td>
     <td><%= task.getDueDate()%></td>
+    <td>
+      <%
+        if (task.getDueDate() == null) {
+      %>
+      <span class="text-muted">—</span>
+      <%
+      } else {
+        long daysLeft = ChronoUnit.DAYS.between(LocalDate.now(), task.getDueDate());
+        if (daysLeft < 0) {
+      %>
+      <span class="text-danger">Overdue by <%= Math.abs(daysLeft) %> days</span>
+      <%
+      } else if (daysLeft == 0) {
+      %>
+      <span class="text-warning">Due today</span>
+      <%
+      } else {
+      %>
+      <span>Due in <%= daysLeft %> days</span>
+      <%
+          }
+        }
+      %>
+    </td>
     <td><%= task.getUserId() %></td>
     <td>
       <form action="toggle-task" method="post" style="display:inline;">

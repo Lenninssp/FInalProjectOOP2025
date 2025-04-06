@@ -96,7 +96,16 @@ public class TaskDAO {
                 sql += " AND completed = false";
             }
         }
-        sql += " ORDER BY due_date ASC NULLS LAST";
+        sql += """
+        ORDER BY 
+        CASE
+            WHEN due_date IS NULL THEN 2
+            WHEN due_date < CURRENT_DATE THEN 0
+            WHEN due_date = CURRENT_DATE THEN 1
+            ELSE 2
+        END,
+        due_date ASC
+        """;
         try (Connection conn = DataBaseConnector.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 

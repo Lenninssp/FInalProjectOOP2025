@@ -8,6 +8,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="common/header.jsp"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="true" %>
+
 <%
     Integer userId = (Integer) session.getAttribute("userId");
     String username = (String) session.getAttribute("username");
