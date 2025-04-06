@@ -6,12 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <div style="background-color: #f0f0f0; padding: 10px;">
   <a href="index.jsp">🏠 Home</a> |
   <a href="task.jsp">📝 New Task</a> |
   <a href="task-list">📋 My Tasks</a> |
   <a href="register.jsp">👤 Register</a> |
   <a href="login.jsp">🔐 Login</a>
+  <% if (session.getAttribute("userId") != null) { %>
+  | <a href="logout">🚪 Logout</a>
+  <% } %>
 </div>
 <hr>
