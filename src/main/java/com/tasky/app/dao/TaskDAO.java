@@ -83,15 +83,28 @@ public class TaskDAO {
         return null;
     }
 
-    public static List<Task> getTasksByUserId(int userId) {
+    public static List<Task> getTasksByUserId(int userId, String query, String status) {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM tasks WHERE user_id = ?";
+        if (query != null && !query.isEmpty()) {
+            sql += " AND LOWER(title) LIKE ?";
+        }
+        if(status != null) {
+            if(status.equals("completed")) {
+                sql += " AND completed = true";
+            } else if (status.equals("pending")){
+                sql += " AND completed = false";
+            }
+        }
+        sql += " ORDER BY due_date ASC NULLS LAST";
         try (Connection conn = DataBaseConnector.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
+            if(query != null && !query.isEmpty()) {
+                stmt.setString(2, "%" + query.toLowerCase() + "%");
+            }
             ResultSet rs = stmt.executeQuery();
-
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");

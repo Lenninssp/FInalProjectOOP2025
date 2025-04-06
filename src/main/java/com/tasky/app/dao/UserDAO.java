@@ -2,6 +2,7 @@ package com.tasky.app.dao;
 
 import com.tasky.app.util.DataBaseConnector;
 import com.tasky.app.model.User;
+import com.tasky.app.util.PasswordEncrypter;
 
 import javax.xml.crypto.Data;
 import java.sql.*;
@@ -29,7 +30,7 @@ public class UserDAO {
     public static void createUser(User user) {
         User existing = getUserByUsername(user.getUsername());
         if(existing != null){
-            out.println("El usuario ya existe");
+            out.println("The user already exists");
             return;
         }
         String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
@@ -40,7 +41,8 @@ public class UserDAO {
             ){
                 stmt.setString(1, user.getUsername());
                 stmt.setString(2, user.getEmail());
-                stmt.setString(3, user.getPassword());
+                String hashedPassword = PasswordEncrypter.hashPassword(user.getPassword());
+                stmt.setString(3, hashedPassword);
 
                 int rows = stmt.executeUpdate();
 
@@ -105,12 +107,13 @@ public class UserDAO {
     }
 
     public static User getUserByUsernameAndPassword(String username, String password) {
+        String hashedPassword = PasswordEncrypter.hashPassword(password);
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         try (Connection conn = DataBaseConnector.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, username);
-            stmt.setString(2, password);
+            stmt.setString(2, hashedPassword);
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {

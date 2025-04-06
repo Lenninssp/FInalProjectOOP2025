@@ -3,6 +3,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="common/header.jsp"%>
 
+<form action="task-list" method="get" class="row g-2 mb-4">
+  <div class="col-auto">
+    <input type="text" name="query" class="form-control" placeholder="Search by title" value="<%= request.getParameter("query") != null ? request.getParameter("query") : ""%>">
+  </div>
+  <div class="col-auto">
+    <select name="status" class="form-select">
+      <option value="">All</option>
+      <option value="completed" <%="completed".equals(request.getParameter("status")) ? "selected" : ""%>>Completed</option>
+      <option value="pending" <%= "pending".equals(request.getParameter("status")) ? "selected" : ""%>>Pending</option>
+    </select>
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </div>
+</form>
+
 <h2>My Tasks</h2>…
 <%
   List<Task> tasks = (List<Task>) request.getAttribute("tasks");

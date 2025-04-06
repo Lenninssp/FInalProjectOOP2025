@@ -20,9 +20,9 @@ public class TaskListServlet extends HttpServlet {
 
         Integer userId = Session.getLoggedUserId(request, response);
         if(userId == null) return;
-        List<Task> tasks = TaskDAO.getTasksByUserId(userId);
-        System.out.println("Tasks" + tasks);
-
+        String query = request.getParameter("query");
+        String status = request.getParameter("status");
+        List<Task> tasks = TaskDAO.getTasksByUserId(userId, query, status);
         request.setAttribute("tasks", tasks);
         request.getRequestDispatcher("task-list.jsp").forward(request, response);
     }

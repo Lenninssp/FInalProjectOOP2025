@@ -16,7 +16,7 @@
         return;
     }
 
-    List<Task> tasks = TaskDAO.getTasksByUserId(userId);
+    List<Task> tasks = TaskDAO.getTasksByUserId(userId, null, null);
     int total = tasks.size();
     int completed = 0;
     for (Task t : tasks) {
