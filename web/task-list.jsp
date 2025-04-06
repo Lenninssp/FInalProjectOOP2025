@@ -6,6 +6,7 @@
   <title>Task List</title>
 </head>
 <body>
+<%@ include file="flash.jsp" %>
 <%@include file="navbar.jsp"%>
 <h2>My Tasks</h2>…
 <%
@@ -40,6 +41,10 @@
       <form action="delete-task" method="post" style="display: inline" onsubmit="return confirm('Are you sure you want to delete this task?');">
         <input type="hidden" name="taskId" value="<%= task.getId() %>">
         <button type="submit">🗑️ Delete</button>
+      </form>
+      <form action="edit-task" method="get" style="display:inline;">
+        <input type="hidden" name="taskId" value="<%= task.getId() %>">
+        <button type="submit">✏️ Edit</button>
       </form>
     </td>
   </tr>

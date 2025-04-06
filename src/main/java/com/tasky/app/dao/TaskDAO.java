@@ -69,7 +69,7 @@ public class TaskDAO {
                     String title = rs.getString("title");
                     String description = rs.getString("description");
                     boolean completed = rs.getBoolean("completed");
-                    int userId = rs.getInt("userId");
+                    int userId = rs.getInt("USER_ID");
                     return new Task( id,  title,  description,  completed,  userId);
                 }
             }
@@ -126,6 +126,25 @@ public class TaskDAO {
             System.out.println("Task deleted: " + taskId);
         } catch(SQLException e) {
             System.out.println("❌ Error deleting task: " + e);
+        }
+    }
+
+    public static void updateTask(Task task) {
+        String sql = "UPDATE tasks SET title = ?, description = ?, completed = ? WHERE id = ? AND user_id = ?";
+        try (Connection conn = DataBaseConnector.connect();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, task.getTitle());
+            stmt.setString(2, task.getDescription());
+            stmt.setBoolean(3, task.isCompleted());
+            stmt.setInt(4, task.getId());
+            stmt.setInt(5, task.getUserId());
+
+            stmt.executeUpdate();
+            System.out.println("Task updated: " + task);
+
+        } catch (SQLException e) {
+            System.out.println("Error updating task: " + e.getMessage());
         }
     }
 }

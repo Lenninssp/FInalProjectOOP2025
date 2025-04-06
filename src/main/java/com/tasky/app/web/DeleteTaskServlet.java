@@ -15,6 +15,7 @@ public class DeleteTaskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int taskId = Integer.parseInt(request.getParameter("taskId"));
         TaskDAO.deleteTask(taskId);
+        request.getSession().setAttribute("flash", "✅ Task deleted successfully!");
         response.sendRedirect("task-list");
     }
 }

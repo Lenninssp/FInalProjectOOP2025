@@ -21,6 +21,8 @@ public class CompleteTaskServlet extends HttpServlet {
 
         TaskDAO.toggleTaskCompletion(taskId, completed);
 
+        request.getSession().setAttribute("flash", "✅ Task state changed successfully!");
+
         response.sendRedirect("task-list");
     }
 }

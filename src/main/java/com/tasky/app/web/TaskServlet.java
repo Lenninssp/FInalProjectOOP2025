@@ -34,7 +34,7 @@ public class TaskServlet extends HttpServlet {
         logger.info("New task created: " + task);
 
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<h2>Task '" + title + "' created successfully!</h2>");
+        request.getSession().setAttribute("flash", "✅ Task created successfully!");
+        response.sendRedirect("task.jsp");
     }
 }

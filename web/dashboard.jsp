@@ -13,6 +13,7 @@
     <title>Dashboard</title>
 </head>
 <body>
+<%@ include file="flash.jsp" %>
 <%@include file="navbar.jsp"%>
 <%
     Integer userId = (Integer) session.getAttribute("userId");
