@@ -16,6 +16,7 @@
 <%@include file="navbar.jsp"%>
 <%
     Integer userId = (Integer) session.getAttribute("userId");
+    String username = (String) session.getAttribute("username");
     if (userId == null) {
         response.sendRedirect("login.jsp");
         return;
@@ -28,7 +29,7 @@
         if (t.isCompleted()) completed++;
     }
 %>
-<h2>Welcome back!</h2>
+<h2>Welcome back!<strong><%=username%></strong></h2>
 <p>You have <strong><%= total %>
 </strong> tasks.</p>
 <p><strong><%= completed %>
