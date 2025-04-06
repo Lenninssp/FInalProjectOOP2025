@@ -1,3 +1,5 @@
+package com.tasky.app.util;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,17 +13,13 @@ public class DataBaseConnector {
 
     public static Connection connect() {
         try {
+            Class.forName("org.h2.Driver");
             Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            out.println("Connection to H2 successful");
+            System.out.println("Successful connection");
             return conn;
+        } catch (Exception e) {
+            System.out.println("Error connecting to DB: " + e.getMessage());
+            throw new RuntimeException("unhandled", e);
         }
-        catch( SQLException e) {
-            out.println("Error al conectar " + e.getMessage());
-            return null;
-        }
-    }
-
-    public static void main(String[] args) {
-        connect();
     }
 }

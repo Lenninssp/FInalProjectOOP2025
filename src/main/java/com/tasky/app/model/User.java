@@ -1,3 +1,4 @@
+package com.tasky.app.model;
 
 public class User {
     private int id;
@@ -30,6 +31,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{id=" + id + ", username='" + username + "', email='" + email + "'}";
+        return "com.tasky.app.model.User{id=" + id + ", username='" + username + "', email='" + email + "'}";
     }
 }

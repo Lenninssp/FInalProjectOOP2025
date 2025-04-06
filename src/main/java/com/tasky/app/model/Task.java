@@ -1,3 +1,5 @@
+package com.tasky.app.model;
+
 public class Task {
     private int id;
     private String title;
@@ -34,6 +36,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{id=" + id + ", title='" + title + "', userId=" + userId + ", completed=" + completed + "}";
+        return "com.tasky.app.model.Task{id=" + id + ", title='" + title + "', userId=" + userId + ", completed=" + completed + "}";
     }
 }

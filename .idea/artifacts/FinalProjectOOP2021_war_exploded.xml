@@ -7,6 +7,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="FinalProjectOOP2021" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.h2database:h2:2.3.232" />
+        </element>
       </element>
     </root>
   </artifact>

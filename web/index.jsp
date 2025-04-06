@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: lenninsabogal
+  com.tasky.app.model.User: lenninsabogal
   Date: 1/04/25
   Time: 6:29 PM
   To change this template use File | Settings | File Templates.
@@ -16,5 +16,8 @@
     <input type="text" name="username" placeholder="Lennin Steven">
     <button type="submit">Submit</button>
   </form>
+    <form action="register.jsp" method="get">
+      <button type="submit">Go to register</button>
+    </form>
   </body>
 </html>

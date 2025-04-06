@@ -1,3 +1,8 @@
+package com.tasky.app.dao;
+
+import com.tasky.app.util.DataBaseConnector;
+import com.tasky.app.model.User;
+
 import java.sql.*;
 
 import static java.lang.System.out;
