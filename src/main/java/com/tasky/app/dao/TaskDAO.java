@@ -15,7 +15,7 @@ public class TaskDAO {
         try (Connection conn = DataBaseConnector.connect()) {
             String sql = """
                         CREATE TABLE IF NOT EXISTS tasks (
-                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            id SERIAL PRIMARY KEY,
                             title VARCHAR(100) NOT NULL,
                             description TEXT,
                             completed BOOLEAN DEFAULT FALSE,
@@ -85,19 +85,23 @@ public class TaskDAO {
 
     public static List<Task> getTasksByUserId(int userId, String query, String status) {
         List<Task> tasks = new ArrayList<>();
-        String sql = "SELECT * FROM tasks WHERE user_id = ?";
-        if (query != null && !query.isEmpty()) {
-            sql += " AND LOWER(title) LIKE ?";
+        String sql = "SELECT * FROM tasks WHERE user_id = ? ";
+        boolean hasQuery = query != null && !query.isEmpty();
+
+        if (hasQuery) {
+            sql += "AND LOWER(title) LIKE ? ";
         }
-        if(status != null) {
-            if(status.equals("completed")) {
-                sql += " AND completed = true";
-            } else if (status.equals("pending")){
-                sql += " AND completed = false";
+
+        if (status != null) {
+            if (status.equals("completed")) {
+                sql += "AND completed = true ";
+            } else if (status.equals("pending")) {
+                sql += "AND completed = false ";
             }
         }
+
         sql += """
-        ORDER BY 
+        ORDER BY
         CASE
             WHEN due_date IS NULL THEN 2
             WHEN due_date < CURRENT_DATE THEN 0
@@ -106,13 +110,16 @@ public class TaskDAO {
         END,
         due_date ASC
         """;
+
         try (Connection conn = DataBaseConnector.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
-            if(query != null && !query.isEmpty()) {
+
+            if (hasQuery) {
                 stmt.setString(2, "%" + query.toLowerCase() + "%");
             }
+
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

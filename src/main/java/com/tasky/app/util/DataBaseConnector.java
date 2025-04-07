@@ -2,18 +2,16 @@ package com.tasky.app.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import static java.lang.System.out;
 
 public class DataBaseConnector {
-    private static final String URL = "jdbc:h2:~/testdb";
-    private static final String USER = "sa";
-    private static final String PASSWORD = "";
+    private static final String URL = "jdbc:postgresql://dpg-cvpjkg7gi27c73b6gmag-a.oregon-postgres.render.com:5432/finalprojectoop2025database";
+    private static final String USER = System.getenv("DB_USER");
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
     public static Connection connect() {
         try {
-            Class.forName("org.h2.Driver");
+            System.out.println(USER + PASSWORD);
+            Class.forName("org.postgresql.Driver");
             Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
             System.out.println("Successful connection");
             return conn;
