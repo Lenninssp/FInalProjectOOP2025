@@ -1,0 +1,13 @@
+version: "1"
+services:
+  my-web-app-db:
+    image: postgres
+    environment:
+      - DB_USER=finalprojectoop2025database_user
+      - DB_PASSWORD=NjPl6BAASjyvknn1uBI9wTT38ApX4BKP
+  my-web-app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - my-web-app-db

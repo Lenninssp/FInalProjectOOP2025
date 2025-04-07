@@ -1,7 +1,0 @@
-com/tasky/app/util/DataBaseConnector.class
-com/tasky/app/dao/TaskDAO.class
-com/tasky/app/dao/UserDAO.class
-com/tasky/app/web/RegisterServlet.class
-com/tasky/app/model/Task.class
-com/tasky/app/Main.class
-com/tasky/app/model/User.class
