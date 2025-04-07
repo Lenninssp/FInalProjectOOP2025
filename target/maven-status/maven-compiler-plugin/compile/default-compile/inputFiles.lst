@@ -4,5 +4,14 @@
 /Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/model/Task.java
 /Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/model/User.java
 /Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/util/DataBaseConnector.java
-/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/HelloServlet.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/util/PasswordEncrypter.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/util/Session.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/CompleteTaskServlet.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/DeleteTaskServlet.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/EditTaskServlet.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/LoginServlet.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/LogoutServlet.java
 /Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/RegisterServlet.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/TaskListServlet.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/TaskServlet.java
+/Users/lenninsabogal/Developer/Kotlin/FinalProjectOOP2021/src/main/java/com/tasky/app/web/UpdateTaskServlet.java
