@@ -1,6 +1,5 @@
-package com.tasky.app;
+package com.tasky.app.model;
 
-import com.tasky.app.model.User;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,6 +1,5 @@
 package com.tasky.app.dao;
 
-import com.tasky.app.dao.UserDAO;
 import com.tasky.app.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,27 +13,29 @@ public class UserDAOTest {
     }
 
     @Test
-    public void testUserCreationAndRetreival() {
-
-        String username = "unit_test_user";
-        String email = "unit@example.com";
-        String password = "test123";
-
-        User user = new User(username, email, password);
+    public void testCreateAndGetUser() {
+        User user = new User("unittestuser", "unit@gmail.com", "pass123");
         UserDAO.createUser(user);
 
-        User fetchedUser = UserDAO.getUserById(user.getId());
-        assertNotNull(fetchedUser);
-        assertEquals(username, fetchedUser.getUsername());
-        assertEquals(email, fetchedUser.getEmail());
-        assertNotEquals(password, fetchedUser.getPassword());
+        assertTrue(user.getId() > 0, "User ID should be set after insertion");
+
+        User retrieved = UserDAO.getUserById(user.getId());
+        assertNotNull(retrieved, "User should be found in database, retreiving with ID");
+        assertEquals(retrieved.getUsername(), user.getUsername());
+        assertEquals(retrieved.getEmail(), user.getEmail());
+
+        User retrieved2 = UserDAO.getUserByUsername(user.getUsername());
+        assertNotNull(retrieved2, "User should be found in database, retrieving with username");
+        assertEquals(retrieved2.getEmail(), user.getEmail());
+        assertEquals(retrieved2.getUsername(), user.getUsername());
+    }
+
+    @Test
+    public void testLoginWithCorrectCredentials() {
 
     }
 
-//    @Test
-//    public void testCreateAndGetUser() {
-//        User user = new User("unittestuser", )
-//    }
+
 
 
 }

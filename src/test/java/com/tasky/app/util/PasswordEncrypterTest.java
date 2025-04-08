@@ -1,6 +1,5 @@
-package com.tasky.app;
+package com.tasky.app.util;
 
-import com.tasky.app.util.PasswordEncrypter;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
