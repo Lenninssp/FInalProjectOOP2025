@@ -10,23 +10,6 @@ import java.sql.*;
 import static java.lang.System.out;
 
 public class UserDAO {
-    public static void createTable () {
-        try (Connection conn = DataBaseConnector.connect()) {
-            String sql = """
-                    CREATE TABLE IF NOT EXISTS users (
-                    id SERIAL PRIMARY KEY,
-                    username VARCHAR(50) NOT NULL,
-                    email VARCHAR(100),
-                    password VARCHAR(100)
-                    );
-                    """;
-            assert conn != null;
-            conn.createStatement().execute(sql);
-            out.println("Table users created successfully");
-        } catch (SQLException e) {
-            out.println("Error creating table " + e.getMessage());
-        }
-    }
     public static void createUser(User user) {
         User existing = getUserByUsername(user.getUsername());
         if(existing != null){
@@ -57,7 +40,7 @@ public class UserDAO {
             }
         }
         catch (SQLException e) {
-            out.println("Error creating user: " + e.getMessage());
+            throw new RuntimeException("Error creating user: " + e.getMessage());
         }
     }
 
@@ -77,7 +60,7 @@ public class UserDAO {
             }
         }
         catch(SQLException e) {
-            out.println("Error reading user: " + e.getMessage());
+            throw new RuntimeException("Error reading user: " + e.getMessage());
         }
         return null;
     }
@@ -100,7 +83,7 @@ public class UserDAO {
                 }
             }
         } catch (SQLException e) {
-            out.println("Error reading user: " + e.getMessage());
+            throw new RuntimeException("Error reading user: " + e.getMessage());
         }
 
         return null;
@@ -123,9 +106,32 @@ public class UserDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("❌ Error during login: " + e.getMessage());
+            throw new RuntimeException("❌ Error during login: " + e.getMessage());
         }
         return null;
+    }
+
+    public static boolean deleteUser(Integer id, String username) {
+        if (id == null && username == null) {
+            throw new IllegalArgumentException("Either id or username must be provided");
+        }
+
+        String sql = (id != null) ? "DELETE FROM users WHERE id = ?" : "DELETE FROM users WHERE username = ?";
+
+        try (Connection conn = DataBaseConnector.connect();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            if (id != null) {
+                stmt.setInt(1, id);
+            } else {
+                stmt.setString(1, username);
+            }
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting user", e);
+        }
     }
 
 }

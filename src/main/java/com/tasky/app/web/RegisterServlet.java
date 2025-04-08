@@ -25,7 +25,6 @@ public class RegisterServlet extends HttpServlet {
 
         User user = new User(username, email, password);
         logger.info("new user " + user);
-        UserDAO.createTable();
         UserDAO.createUser(user);
         User fetchedUser = UserDAO.getUserById(user.getId());
         logger.info("Fetched user: " + fetchedUser);

@@ -1,4 +1,4 @@
-# Tasky 📝
+# Tasky 📝(BETA)
 ### by Lennin Steven Sabogal Prieto
 
 A simple full-stack task management web app using Java Servlets, JSP, PostgreSQL, and Docker — built as a final project for OOP2025.
