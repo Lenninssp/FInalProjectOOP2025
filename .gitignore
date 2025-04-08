@@ -27,3 +27,13 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Maven
+target/
+
+FinalProjectOOP2021-1.0.war
+FinalProjectOOP2021.iml
