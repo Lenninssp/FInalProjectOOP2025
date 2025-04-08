@@ -49,6 +49,12 @@ Make sure the `.war` is generated in `target/FinalProjectOOP2021-1.0.war`.
 docker buildx build \
   --platform linux/amd64 \
   -t finalprojectoop2021 .
+  
+  docker buildx build \
+   --platform linux/amd64 \
+   -t lennissp/finalprojectoop2021:latest \
+   --push .
+
 ```
 
 ### 5. Run the app
