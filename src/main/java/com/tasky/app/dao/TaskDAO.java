@@ -11,25 +11,6 @@ import java.util.List;
 import static java.lang.System.out;
 
 public class TaskDAO {
-    public static void createTaskTable() {
-        try (Connection conn = DataBaseConnector.connect()) {
-            String sql = """
-                        CREATE TABLE IF NOT EXISTS tasks (
-                            id SERIAL PRIMARY KEY,
-                            title VARCHAR(100) NOT NULL,
-                            description TEXT,
-                            completed BOOLEAN DEFAULT FALSE,
-                            user_id INT,
-                            due_date DATE,
-                            FOREIGN KEY (user_id) REFERENCES users(id)
-                        );
-                    """;
-            conn.createStatement().execute(sql);
-            System.out.println("Tabla 'tasks' creada exitosamente.");
-        } catch (SQLException e) {
-            System.out.println("Error creando tabla 'tasks': " + e.getMessage());
-        }
-    }
 
     public static void createTask(Task task) {
         String sql = "INSERT INTO tasks (title, description, completed, user_id, due_date) VALUES (?, ?, ?, ?, ?)";
@@ -56,7 +37,7 @@ public class TaskDAO {
                 }
             }
         } catch (SQLException e) {
-            out.println("Error creating task: " + e.getMessage());
+            throw new RuntimeException("Error creating task: " + e.getMessage());
         }
     }
 
@@ -78,7 +59,7 @@ public class TaskDAO {
                 }
             }
         } catch (SQLException e) {
-            out.println("Error reading task: " + e.getMessage());
+            throw new RuntimeException("Error reading task: " + e.getMessage());
         }
         return null;
     }
@@ -132,7 +113,7 @@ public class TaskDAO {
                 tasks.add(task);
             }
         } catch (SQLException e) {
-            System.out.println("Error reading tasks: " + e.getMessage());
+            throw new RuntimeException("Error reading tasks: " + e.getMessage());
         }
         return tasks;
     }
@@ -146,7 +127,7 @@ public class TaskDAO {
             stmt.executeUpdate();
             System.out.println("Task marked as completed");
         } catch (SQLException e) {
-            System.out.println("❌ Error marking task as completed: " + e);
+            throw new RuntimeException("❌ Error marking task as completed: " + e);
         }
     }
 
@@ -157,7 +138,7 @@ public class TaskDAO {
             stmt.executeUpdate();
             System.out.println("Task deleted: " + taskId);
         } catch (SQLException e) {
-            System.out.println("❌ Error deleting task: " + e);
+            throw new RuntimeException("❌ Error deleting task: " + e);
         }
     }
 
@@ -177,7 +158,7 @@ public class TaskDAO {
             System.out.println("Task updated: " + task);
 
         } catch (SQLException e) {
-            System.out.println("Error updating task: " + e.getMessage());
+            throw new RuntimeException("Error updating task: " + e.getMessage());
         }
     }
 }
