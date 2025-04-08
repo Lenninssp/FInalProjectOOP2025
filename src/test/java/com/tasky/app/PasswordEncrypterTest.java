@@ -1,3 +1,5 @@
+package com.tasky.app;
+
 import com.tasky.app.util.PasswordEncrypter;
 import org.junit.jupiter.api.Test;
 

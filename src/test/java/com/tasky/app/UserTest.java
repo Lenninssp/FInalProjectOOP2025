@@ -1,3 +1,5 @@
+package com.tasky.app;
+
 import com.tasky.app.model.User;
 import org.junit.jupiter.api.Test;
 
