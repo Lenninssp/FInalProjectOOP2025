@@ -70,6 +70,78 @@ Then open your browser:
 
 ---
 
+## 🚀 Deployment (Manual - Docker Hub + Render)
+
+To redeploy the app to Render using a Docker image, follow these steps:
+
+### 1. Clean and rebuild the WAR file
+
+Use Maven to clean and build your project. From the root of the project, run:
+
+```bash
+./mvnw clean package
+```
+
+> This generates a fresh `.war` file at `target/FinalProjectOOP2021-1.0.war`.
+
+---
+
+### 2. Rebuild the Docker image for Render
+
+Make sure to build the image using the `linux/amd64` platform (required by Render):
+
+```bash
+docker buildx build \
+  --platform linux/amd64 \
+  -t lenninssp/finalprojectoop2021 \
+  --push \
+  .
+```
+
+> This will rebuild the Docker image and push it to your Docker Hub account.
+
+---
+
+### 3. Deploy on Render
+
+Go to your Render dashboard:
+
+- Choose your service
+- If using "Existing Image", click **"Manual Deploy"** or **"Clear cache & redeploy"**
+- Render will pull the latest image and restart your service
+
+---
+
+### 🛠 Optional: Create a shortcut script
+
+Create a file called `deploy.sh`:
+
+```bash
+#!/bin/bash
+./mvnw clean package &&
+docker buildx build \
+  --platform linux/amd64 \
+  -t lenninssp/finalprojectoop2021 \
+  --push \
+  .
+```
+
+Give it execution permission:
+
+```bash
+chmod +x deploy.sh
+```
+
+And just run this anytime you want to redeploy:
+
+```bash
+./deploy.sh
+```
+
+> 💡 Consider adding `deploy.sh` to your `.gitignore` so it's not pushed to GitHub.
+
+---
+
 ## 📦 Deployment Notes (Render)
 
 - PostgreSQL is hosted via Render.
