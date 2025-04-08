@@ -7,13 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserDAOTest {
-    @BeforeEach
-    public void setup() {
-        UserDAO.createTable();
-    }
-
     @Test
     public void testCreateAndGetUser() {
+        UserDAO.deleteUser(null, "unitetestuser");
         User user = new User("unittestuser", "unit@gmail.com", "pass123");
         UserDAO.createUser(user);
 
@@ -32,7 +28,28 @@ public class UserDAOTest {
 
     @Test
     public void testLoginWithCorrectCredentials() {
+        UserDAO.deleteUser(null, "login_test_user");
+        User user = new User("login_test_user", "login@test.com","mypassword ");
+        UserDAO.createUser(user);
 
+        User fetched = UserDAO.getUserByUsernameAndPassword("login_test_user", "mypassword");
+        assertNotNull(fetched, "Cannot find the user with that username and that password");
+        assertEquals(user.getUsername(), fetched.getUsername());
+    }
+
+    @Test
+    public void testLoginFailsWithWrongPassword() {
+        String username = "login_fail_user";
+        String email = "fail@test.com";
+        String correctPassword = "secret123";
+        String wrongPassword = "wrong123";
+
+        UserDAO.deleteUser(null, username);
+        User user = new User(username, email, correctPassword);
+        UserDAO.createUser(user);
+
+        User result = UserDAO.getUserByUsernameAndPassword(username, wrongPassword);
+        assertNull(result, "Login should fail with incorrect password");
     }
 
 
