@@ -1,4 +1,4 @@
-package com.tasky.app;
+package com.tasky.app.dao;
 
 import com.tasky.app.dao.UserDAO;
 import com.tasky.app.model.User;
@@ -30,6 +30,11 @@ public class UserDAOTest {
         assertNotEquals(password, fetchedUser.getPassword());
 
     }
+
+//    @Test
+//    public void testCreateAndGetUser() {
+//        User user = new User("unittestuser", )
+//    }
 
 
 }
