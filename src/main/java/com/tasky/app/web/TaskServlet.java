@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 
@@ -33,7 +32,6 @@ public class TaskServlet extends HttpServlet {
         if(userId == null) return;
 
         Task task = new Task(title, description, false, userId, dueDate);
-        TaskDAO.createTaskTable();
         TaskDAO.createTask(task);
 
         logger.info("New task created: " + task);
