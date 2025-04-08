@@ -33,7 +33,6 @@ public class TaskServlet extends HttpServlet {
         if(userId == null) return;
 
         Task task = new Task(title, description, false, userId, dueDate);
-        TaskDAO.createTaskTable();
         TaskDAO.createTask(task);
 
         logger.info("New task created: " + task);
