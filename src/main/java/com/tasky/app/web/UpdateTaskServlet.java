@@ -32,6 +32,7 @@ public class UpdateTaskServlet extends HttpServlet {
         TaskDAO.updateTask(updatedTask);
 
         request.getSession().setAttribute("flash", "✅ Task updated!");
+        request.getSession().setAttribute("flashType", "success");
         response.sendRedirect("task-list");
     }
 }

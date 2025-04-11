@@ -27,9 +27,11 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("userId", user.getId());
             session.setAttribute("username", user.getUsername());
             request.getSession().setAttribute("flash", "✅ Login successful");
+            request.getSession().setAttribute("flashType", "success");
             response.sendRedirect("dashboard.jsp");
         } else {
             request.getSession().setAttribute("flash", "❌ Invalid credentials");
+            request.getSession().setAttribute("flashType", "danger");
             response.sendRedirect("login.jsp");
         }
     }

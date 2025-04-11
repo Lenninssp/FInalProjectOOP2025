@@ -8,14 +8,17 @@
 <%@ page session="true" %>
 <%
     String flash = (String) session.getAttribute("flash");
+    String type = (String) session.getAttribute("flashType");
     if (flash != null) {
+        if ( type == null) type = "success";
 %>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
+<div class="alert alert-<%= type %> alert-dismissible fade show" role="alert">
     <%= flash %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
 <%
         session.removeAttribute("flash");
+        session.removeAttribute("flashType");
     }
 %>

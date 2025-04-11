@@ -26,9 +26,12 @@ public class EditTaskServlet extends HttpServlet {
 
         if (task != null && task.getUserId() == userId) {
             request.setAttribute("task", task);
+            request.getSession().setAttribute("flash", "Task found.");
+            request.getSession().setAttribute("flashType", "success");
             request.getRequestDispatcher("edit-task.jsp").forward(request, response);
         } else {
             request.getSession().setAttribute("flash", "❌ Task not found or unauthorized.");
+            request.getSession().setAttribute("flashType", "danger");
             response.sendRedirect("task-list");
         }
     }

@@ -38,6 +38,7 @@ public class TaskServlet extends HttpServlet {
 
         response.setContentType("text/html");
         request.getSession().setAttribute("flash", "✅ Task created successfully!");
+        request.getSession().setAttribute("flashType", "success");
         response.sendRedirect("task.jsp");
     }
 }
