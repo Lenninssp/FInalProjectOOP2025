@@ -16,6 +16,7 @@ public class DeleteTaskServlet extends HttpServlet {
         int taskId = Integer.parseInt(request.getParameter("taskId"));
         TaskDAO.deleteTask(taskId);
         request.getSession().setAttribute("flash", "✅ Task deleted successfully!");
+        request.getSession().setAttribute("flashType", "success");
         response.sendRedirect("task-list");
     }
 }

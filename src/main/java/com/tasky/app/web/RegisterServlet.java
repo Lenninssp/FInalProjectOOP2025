@@ -30,6 +30,7 @@ public class RegisterServlet extends HttpServlet {
         logger.info("Fetched user: " + fetchedUser);
 
         request.getSession().setAttribute("flash", "✅ Registration successful");
+        request.getSession().setAttribute("flashType", "success");
         response.sendRedirect("register.jsp");
     }
 }
