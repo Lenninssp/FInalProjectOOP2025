@@ -4,7 +4,6 @@ import com.tasky.app.util.DataBaseConnector;
 import com.tasky.app.model.User;
 import com.tasky.app.util.PasswordEncrypter;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 
 import static java.lang.System.out;
@@ -12,8 +11,9 @@ import static java.lang.System.out;
 public class UserDAO {
     public static void createUser(User user) {
         User existing = getUserByUsername(user.getUsername());
-        if(existing != null){
-            out.println("The user already exists");
+        if (existing != null) {
+            System.out.println("User already exists");
+            user.setId(existing.getId());
             return;
         }
         String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
@@ -111,7 +111,7 @@ public class UserDAO {
         return null;
     }
 
-    public static boolean deleteUser(Integer id, String username) {
+    public static void deleteUser(Integer id, String username) {
         if (id == null && username == null) {
             throw new IllegalArgumentException("Either id or username must be provided");
         }
@@ -128,7 +128,6 @@ public class UserDAO {
             }
 
             int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting user", e);
         }

@@ -52,7 +52,27 @@ public class UserDAOTest {
         assertNull(result, "Login should fail with incorrect password");
     }
 
+    @Test
+    public void testPreventDuplicateUserCreation() {
+        String username = "dupe_user";
+        UserDAO.deleteUser(null, username);
 
+        User user1 = new User(username, "dupe1@test.com", "pass1");
+        User user2 = new User(username, "dupe2@test.com", "pass2");
 
+        UserDAO.createUser(user1);
+        int firstId = user1.getId();
+
+        UserDAO.createUser(user2);
+        int secondId = user2.getId();
+
+        assertEquals(firstId, secondId, "Second user creation should not overwrite the first");
+
+        User result = UserDAO.getUserByUsername(username);
+        assertNotNull(result);
+        assertEquals("dupe1@test.com", result.getEmail());
+
+        UserDAO.deleteUser(firstId, null);
+    }
 
 }

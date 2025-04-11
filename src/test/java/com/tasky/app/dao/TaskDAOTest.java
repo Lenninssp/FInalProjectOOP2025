@@ -124,4 +124,40 @@ public class TaskDAOTest {
         TaskDAO.deleteTask(todayTask.getId());
         TaskDAO.deleteTask(upcoming.getId());
     }
+
+    @Test
+    public void testUpdateTask() {
+        Task task = new Task("Original Title", "Original descirption", false, userId, date);
+        TaskDAO.createTask(task);
+        int taskId = task.getId();
+
+        task.setTitle("Update Title");
+        task.setDescription("UPdated description");
+        task.setCompleted(true);
+        task.setDueDate(date.plusDays(5));
+        TaskDAO.updateTask(task);
+
+        Task updated = TaskDAO.getTaskById(taskId);
+        assertNotNull(updated, "updated task should not be null");
+        assertEquals("Updated Title", updated.getTitle());
+        assertEquals("Updated description", updated.getDescription());
+        assertTrue(updated.isCompleted());
+        assertEquals(date.plusDays(5), updated.getDueDate());
+
+        TaskDAO.deleteTask(taskId);
+    }
+
+    @Test
+    public void testDeleteTask(){
+        Task task = new Task("Delete test", "will be removed", false, userId, date);
+        TaskDAO.createTask(task);
+        int taskId = task.getId();
+
+        Task fetched = TaskDAO.getTaskById(taskId);
+        assertNotNull(fetched, "Task should  exist before deletion");
+
+        TaskDAO.deleteTask(taskId);
+        Task afterDelete = TaskDAO.getTaskById(taskId);
+        assertNull(afterDelete, "Task should be null after deletion");
+    }
 }
