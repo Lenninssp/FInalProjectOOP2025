@@ -25,6 +25,7 @@ public class Task {
         this.completed = completed;
         this.userId = userId;
         this.dueDate = dueDate;
+        System.out.println("creating task");
     }
 
     public Task (String title, String description, boolean completed, int userId, LocalDate dueDate){

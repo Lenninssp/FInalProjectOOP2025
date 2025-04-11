@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskDAOTest {
     public static int userId;
+    public static LocalDate date = LocalDate.now().plusDays(1);
     @BeforeAll
     public static void createTestUser() {
         UserDAO.deleteUser(null, "task_user");
@@ -21,8 +22,13 @@ public class TaskDAOTest {
 
     @Test
     public void testTaskLifecycle() {
-        Task task = new Task("Write tests", "Check all lifecycle methods", false, userId, LocalDate.now().plusDays(1));
-        assertTrue(task.getId() > 0, "Tasl should have an ID after creation");
+        Task task = new Task("Write tests", "Check all lifecycle methods", false, userId, date);
+        TaskDAO.createTask(task);
+
+        assertTrue(task.getId() > 0, "Task should have an ID after creation");
+
+        Task fetchedTask = TaskDAO.getTaskById(task.getId());
+        assertNotNull(fetchedTask, "Task should be retrievable after creation");
 
         Task fetched = TaskDAO.getTaskById(task.getId());
         assertNotNull(fetched);
@@ -34,7 +40,7 @@ public class TaskDAOTest {
 
         Task updated = TaskDAO.getTaskById(task.getId());
         assertNotNull(updated, "Updated task shouldn't be null");
-        assertEquals("Update title", updated.getTitle());
+        assertEquals("Updated title", updated.getTitle());
         assertTrue(updated.isCompleted());
 
         TaskDAO.toggleTaskCompletion(task.getId(), updated.isCompleted());
@@ -49,7 +55,7 @@ public class TaskDAOTest {
 
     @Test
     public void taskGetTasksByUserIdWithFilter() {
-        String baseTitle = "UniteTestTask";
+        String baseTitle = "UnitTestTask";
         int countBefore = TaskDAO.getTasksByUserId(userId, null, null).size();
 
         Task task1 = new Task(baseTitle + " A", "desc A", false, userId, LocalDate.now());
@@ -61,6 +67,7 @@ public class TaskDAOTest {
         TaskDAO.createTask(task3);
 
         var titleFiltered = TaskDAO.getTasksByUserId(userId, "UnitTestTask", null);
+        System.out.println("titleFiltered" + titleFiltered);
         assertTrue(titleFiltered.stream().anyMatch(t -> t.getTitle().contains("UnitTestTask")));
         assertFalse(titleFiltered.stream().anyMatch(t -> t.getTitle().equals("OtherTask")));
 
@@ -71,5 +78,50 @@ public class TaskDAOTest {
         var pending = TaskDAO.getTasksByUserId(userId, null, "pending");
         assertTrue(pending.stream().anyMatch(t -> !t.isCompleted()));
         assertFalse(pending.stream().anyMatch(Task::isCompleted));
+    }
+
+    @Test
+    public void testToggleTaskCompletion() {
+        Task task = new Task("Toggle test", "should filp completion", false, userId, date);
+
+        assertFalse(task.isCompleted());
+
+        TaskDAO.createTask(task);
+        assertNotNull(TaskDAO.getTaskById(task.getId()));
+        TaskDAO.toggleTaskCompletion(task.getId(), task.isCompleted());
+        Task toggleOnce = TaskDAO.getTaskById(task.getId());
+        System.out.println(toggleOnce);
+        assertNotNull(toggleOnce);
+        assertTrue(toggleOnce.isCompleted(), "task should be back to pending");
+
+        TaskDAO.deleteTask(task.getId());
+
+    }
+
+
+    @Test
+    public void testDueDates() {
+        LocalDate today = LocalDate.now();
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        Task overdue = new Task("Overdue", "should properly test the due dates", false, userId, yesterday);
+        Task todayTask = new Task("Today", "should properly test the due dates", false, userId, today);
+        Task upcoming = new Task("Upcoming", "should properly test the due dates", false, userId, tomorrow);
+
+        TaskDAO.createTask(overdue);
+        TaskDAO.createTask(todayTask);
+        TaskDAO.createTask(upcoming);
+
+        var tasks = TaskDAO.getTasksByUserId(userId, null, "pending");
+
+        assertTrue(tasks.stream().anyMatch(t -> t.getTitle().equals("Overdue")));
+        assertTrue(tasks.stream().anyMatch(t -> t.getTitle().equals("Today")));
+        assertTrue(tasks.stream().anyMatch(t -> t.getTitle().equals("Upcoming")));
+
+        assertEquals("Overdue", tasks.getFirst().getTitle());
+
+        TaskDAO.deleteTask(overdue.getId());
+        TaskDAO.deleteTask(todayTask.getId());
+        TaskDAO.deleteTask(upcoming.getId());
     }
 }

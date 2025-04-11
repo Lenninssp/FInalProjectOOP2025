@@ -13,6 +13,9 @@ public class PasswordEncrypter {
             }
             return sb.toString();
         } catch (Exception e) {
+            if (password == null) {
+                throw new NullPointerException();
+            }
             throw new RuntimeException("Error hashing password", e);
         }
     }

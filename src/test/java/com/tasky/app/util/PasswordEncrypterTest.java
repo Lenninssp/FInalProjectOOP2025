@@ -23,4 +23,18 @@ public class PasswordEncrypterTest {
 
         assertEquals(hash1, hash2);
     }
+
+    @Test
+    public void testHashEmptyString() {
+        String hash = PasswordEncrypter.hashPassword("");
+        assertNotNull(hash);
+        assertFalse(hash.isEmpty(), "Hash of empty string should not be empty");
+    }
+
+    @Test
+    public void testHashNullPassword() {
+        assertThrows(NullPointerException.class, () -> {
+            PasswordEncrypter.hashPassword(null);
+        });
+    }
 }

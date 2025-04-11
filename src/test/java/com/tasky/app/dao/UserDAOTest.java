@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserDAOTest {
     @Test
     public void testCreateAndGetUser() {
-        UserDAO.deleteUser(null, "unitetestuser");
+        UserDAO.deleteUser(null, "unittestuser");
         User user = new User("unittestuser", "unit@gmail.com", "pass123");
         UserDAO.createUser(user);
 
@@ -29,7 +29,7 @@ public class UserDAOTest {
     @Test
     public void testLoginWithCorrectCredentials() {
         UserDAO.deleteUser(null, "login_test_user");
-        User user = new User("login_test_user", "login@test.com","mypassword ");
+        User user = new User("login_test_user", "login@test.com","mypassword");
         UserDAO.createUser(user);
 
         User fetched = UserDAO.getUserByUsernameAndPassword("login_test_user", "mypassword");
