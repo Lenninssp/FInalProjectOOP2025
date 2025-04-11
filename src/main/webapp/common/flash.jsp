@@ -16,6 +16,6 @@
 </div>
 
 <%
-        session.removeAttribute(flash);
+        session.removeAttribute("flash");
     }
 %>
