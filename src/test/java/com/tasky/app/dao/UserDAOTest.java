@@ -75,4 +75,28 @@ public class UserDAOTest {
         UserDAO.deleteUser(firstId, null);
     }
 
+    @Test
+    public void testDeleteUserById() {
+        User testUser = new User("Deletion Rodriguez", "todelete@delete.com", "delete123");
+        UserDAO.createUser(testUser);
+        Integer userId = testUser.getId();
+        assertNotNull(userId);
+
+        UserDAO.deleteUser(userId, null);
+        User userIdDeleted = UserDAO.getUserById(userId);
+        assertNull(userIdDeleted, "User should be Null after deletion");
+    }
+
+    @Test
+    public void deleteUserByUsername() {
+        User testUser = new User("Deletion Rodriguez", "todelete@delete.com", "delete123");
+        UserDAO.createUser(testUser);
+        String username = testUser.getUsername();
+        assertNotNull(username);
+
+        UserDAO.deleteUser(null, username);
+        User fetched = UserDAO.getUserByUsername(testUser.getUsername());
+        assertNull(fetched, "Deleted user should be Null after deletion");
+    }
+
 }

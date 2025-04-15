@@ -131,8 +131,8 @@ public class TaskDAOTest {
         TaskDAO.createTask(task);
         int taskId = task.getId();
 
-        task.setTitle("Update Title");
-        task.setDescription("UPdated description");
+        task.setTitle("Updated Title");
+        task.setDescription("Updated description");
         task.setCompleted(true);
         task.setDueDate(date.plusDays(5));
         TaskDAO.updateTask(task);
